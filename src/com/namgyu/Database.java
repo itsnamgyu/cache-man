@@ -15,5 +15,5 @@ public interface Database<K, V> {
     /*
     Return success
      */
-    boolean set_value(K key, V value);
+    void set_value(K key, V value);
 }
