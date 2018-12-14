@@ -12,8 +12,5 @@ public interface Database<K, V> {
 
     V get_value(K key);
 
-    /*
-    Return success
-     */
     void set_value(K key, V value);
 }
