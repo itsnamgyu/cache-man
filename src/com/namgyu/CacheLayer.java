@@ -33,7 +33,7 @@ public abstract class CacheLayer<K, V> implements Database<K, V> {
 
     Returns success.
      */
-    public abstract boolean set_value(K key, boolean immediate);
+    public abstract boolean set_value(K key, V value, boolean immediate);
 
     /*
     Perform all lazy updates (mentioned in set_value) immediately.
