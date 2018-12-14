@@ -58,16 +58,21 @@ public class HashCacher<K, V> extends CacheLayer<K, V> {
     public void set_value(K key, V value, boolean immediate) {
         int h = key.hashCode() % table_size;
         if (immediate) {
+            // update origin
             origin.set_value(key, value);
+
+            // update cache if key exists in cache
             if (keys.get(h) == key) {
                 values.set(h, value);
                 dirty.set(h, false);
             }
         } else {
             if (keys.get(h) == key) {
+                //update just the cache if key exists in cache
                 values.set(h, value);
                 dirty.set(h, true);
             } else {
+                // update origin if key doesn't exist in cache
                 origin.set_value(key, value);
             }
         }

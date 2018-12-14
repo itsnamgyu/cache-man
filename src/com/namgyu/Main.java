@@ -27,7 +27,7 @@ public class Main {
         db.reset();
         HashCacher<String, String> cached = new HashCacher<>(db);
 
-        System.out.println("Testing with cache");
+        System.out.println("Testing with cache...");
         start = System.currentTimeMillis();
         mockAccess(cached);
         cached.flush();
