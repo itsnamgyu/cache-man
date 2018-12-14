@@ -4,8 +4,8 @@ import java.util.Vector;
 
 public class HashCacher<K, V> extends CacheLayer<K, V> {
     /*
-    Manual implementation of Hash table
-     */
+    Hash table based cache layer with a manually implement hash table
+    */
 
     private int table_size;
     private Vector<K> keys;
