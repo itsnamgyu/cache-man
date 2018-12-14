@@ -36,6 +36,14 @@ public abstract class CacheLayer<K, V> implements Database<K, V> {
     public abstract boolean set_value(K key, V value, boolean immediate);
 
     /*
+    Use lazy update by default
+     */
+    @Override
+    public boolean set_value(K key, V value) {
+        return set_value(key, value, false);
+    }
+
+    /*
     Perform all lazy updates (mentioned in set_value) immediately.
      */
     public abstract void flush();
