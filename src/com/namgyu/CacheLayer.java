@@ -23,7 +23,7 @@ public abstract class CacheLayer<K, V> implements Database<K, V> {
     Get value from some caching mechanism. If it is not available, this would require
     access from the original database.
      */
-    public abstract V get_value(K key);
+    public abstract V getValue(K key);
 
     /*
     Set value of some value in the database. The immediate flag requires that the
@@ -33,18 +33,18 @@ public abstract class CacheLayer<K, V> implements Database<K, V> {
 
     Returns success.
      */
-    public abstract void set_value(K key, V value, boolean immediate);
+    public abstract void setValue(K key, V value, boolean immediate);
 
     /*
     Use lazy update by default
      */
     @Override
-    public void set_value(K key, V value) {
-        set_value(key, value, false);
+    public void setValue(K key, V value) {
+        setValue(key, value, false);
     }
 
     /*
-    Perform all lazy updates (mentioned in set_value) immediately.
+    Perform all lazy updates (mentioned in setValue) immediately.
      */
     public abstract void flush();
 }

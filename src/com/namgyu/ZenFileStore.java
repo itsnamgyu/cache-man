@@ -42,7 +42,7 @@ public class ZenFileStore implements Database<String, String> {
     }
 
     @Override
-    public String get_value(String key) {
+    public String getValue(String key) {
         try {
             TimeUnit.MILLISECONDS.sleep(delay);
         } catch (InterruptedException e) {
@@ -68,7 +68,7 @@ public class ZenFileStore implements Database<String, String> {
     }
 
     @Override
-    public void set_value(String key, String value) {
+    public void setValue(String key, String value) {
         try {
             TimeUnit.MILLISECONDS.sleep(delay);
         } catch (InterruptedException e) {
@@ -85,7 +85,7 @@ public class ZenFileStore implements Database<String, String> {
                 writer.flush();
             } catch (IOException e) {
                 e.printStackTrace();
-                System.err.println("issue with set value");
+                System.err.println("issue with reset value");
             }
         }
     }

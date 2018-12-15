@@ -37,17 +37,17 @@ public class Main {
     }
 
     private static void mockAccess(Database<String, String> db) {
-        db.set_value("a", "Hello World!");
-        assert(db.get_value("a").equals("Hello World!"));
-        assert(db.get_value("b") == null);
-        db.set_value("b", "Alohamora!");
-        assert(db.get_value("c") == null);
-        assert(db.get_value("b").equals("Alohamora!"));
-        assert(db.get_value("a").equals("Hello World!"));
-        assert(db.get_value("c") == null);
-        db.set_value("b", "Wingardium Leviosa!");
-        assert(db.get_value("b").equals("Wingardium Leviosa!"));
-        assert(db.get_value("a").equals("Hello World!"));
-        assert(db.get_value("b").equals("Wingardium Leviosa!"));
+        db.setValue("a", "Hello World!");
+        assert(db.getValue("a").equals("Hello World!"));
+        assert(db.getValue("b") == null);
+        db.setValue("b", "Alohamora!");
+        assert(db.getValue("c") == null);
+        assert(db.getValue("b").equals("Alohamora!"));
+        assert(db.getValue("a").equals("Hello World!"));
+        assert(db.getValue("c") == null);
+        db.setValue("b", "Wingardium Leviosa!");
+        assert(db.getValue("b").equals("Wingardium Leviosa!"));
+        assert(db.getValue("a").equals("Hello World!"));
+        assert(db.getValue("b").equals("Wingardium Leviosa!"));
     }
 }

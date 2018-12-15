@@ -10,7 +10,7 @@ public interface Database<K, V> {
     of this small project.
      */
 
-    V get_value(K key);
+    V getValue(K key);
 
-    void set_value(K key, V value);
+    void setValue(K key, V value);
 }
