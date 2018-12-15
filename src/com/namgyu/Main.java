@@ -30,9 +30,12 @@ public class Main {
         System.out.println("Testing with hash cache...");
         start = System.currentTimeMillis();
         mockAccess(hash);
+        elapsed = System.currentTimeMillis() - start;
+        System.out.println("Access Time: " + elapsed + "ms");
+        start = System.currentTimeMillis();
         hash.flush();
         elapsed = System.currentTimeMillis() - start;
-        System.out.println("Time elapsed: " + elapsed + "ms");
+        System.out.println("Flush Time: " + elapsed + "ms");
         System.out.println();
 
         // Cached Version
@@ -44,6 +47,7 @@ public class Main {
         // lru.flush();
         elapsed = System.currentTimeMillis() - start;
         System.out.println("Time elapsed: " + elapsed + "ms");
+        System.out.println("Flush Time: Not Implemented :(");
         System.out.println();
     }
 
