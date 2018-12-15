@@ -25,12 +25,23 @@ public class Main {
 
         // Cached Version
         db.reset();
-        HashCacher<String, String> cached = new HashCacher<>(db);
+        CacheLayer<String, String> hash = new HashCacher<>(db, 10);
 
-        System.out.println("Testing with cache...");
+        System.out.println("Testing with hash cache...");
         start = System.currentTimeMillis();
-        mockAccess(cached);
-        cached.flush();
+        mockAccess(hash);
+        hash.flush();
+        elapsed = System.currentTimeMillis() - start;
+        System.out.println("Time elapsed: " + elapsed + "ms");
+        System.out.println();
+
+        // Cached Version
+        db.reset();
+        CacheLayer<String, String> lru = new LRUCacher<>(db, 256, 10);
+        System.out.println("Testing with LRU cache...");
+        start = System.currentTimeMillis();
+        mockAccess(lru);
+        // lru.flush();
         elapsed = System.currentTimeMillis() - start;
         System.out.println("Time elapsed: " + elapsed + "ms");
         System.out.println();
@@ -38,16 +49,22 @@ public class Main {
 
     private static void mockAccess(Database<String, String> db) {
         db.setValue("a", "Hello World!");
-        assert(db.getValue("a").equals("Hello World!"));
-        assert(db.getValue("b") == null);
+        assert (db.getValue("a").equals("Hello World!"));
+        assert (db.getValue("b") == null);
         db.setValue("b", "Alohamora!");
-        assert(db.getValue("c") == null);
-        assert(db.getValue("b").equals("Alohamora!"));
-        assert(db.getValue("a").equals("Hello World!"));
-        assert(db.getValue("c") == null);
+        assert (db.getValue("k") == null);
+        assert (db.getValue("b").equals("Alohamora!"));
+        assert (db.getValue("a").equals("Hello World!"));
+        assert (db.getValue("k") == null);
         db.setValue("b", "Wingardium Leviosa!");
-        assert(db.getValue("b").equals("Wingardium Leviosa!"));
-        assert(db.getValue("a").equals("Hello World!"));
-        assert(db.getValue("b").equals("Wingardium Leviosa!"));
+        assert (db.getValue("b").equals("Wingardium Leviosa!"));
+        assert (db.getValue("a").equals("Hello World!"));
+        assert (db.getValue("k") == null);
+        db.setValue("k", "Much Thanks!");
+        assert (db.getValue("b").equals("Wingardium Leviosa!"));
+        assert (db.getValue("k").equals("Much Thanks!"));
+        assert (db.getValue("b").equals("Wingardium Leviosa!"));
+        assert (db.getValue("a").equals("Hello World!"));
+        assert (db.getValue("k").equals("Much Thanks!"));
     }
 }

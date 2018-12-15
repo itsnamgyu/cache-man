@@ -22,7 +22,7 @@ public class ZenFileStore implements Database<String, String> {
     inner zen—a concept long lost within our fast-paced society. To do so, he
     added a time delay for every single read/write access to this file store.
     This delay can be configured via the constructor, but the creator insists
-    a delay of at least 500ms, for optimal zen.
+    a delay of at least 100ms, for optimal zen.
 
     TL;DR: this database sleeps on access.
      */
@@ -43,6 +43,7 @@ public class ZenFileStore implements Database<String, String> {
 
     @Override
     public String getValue(String key) {
+        System.out.println("Getting: " + key);
         try {
             TimeUnit.MILLISECONDS.sleep(delay);
         } catch (InterruptedException e) {
@@ -69,6 +70,8 @@ public class ZenFileStore implements Database<String, String> {
 
     @Override
     public void setValue(String key, String value) {
+        System.out.println("Setting: " + key);
+
         try {
             TimeUnit.MILLISECONDS.sleep(delay);
         } catch (InterruptedException e) {
