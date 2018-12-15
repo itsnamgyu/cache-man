@@ -36,7 +36,7 @@ public class ZenFileStore implements Database<String, String> {
     private int delay;
 
     public ZenFileStore(int delay) throws NotEnoughZenException {
-        if (delay < 500)
+        if (delay < 100)
             throw new NotEnoughZenException();
         this.delay = delay;
     }

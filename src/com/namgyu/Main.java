@@ -4,7 +4,7 @@ public class Main {
     public static void main(String[] args) throws ZenFileStore.NotEnoughZenException {
         long start;
         long elapsed;
-        int delay = 500;
+        int delay = 100;
 
         System.err.println("Make sure to run with assertions enabled");
 
