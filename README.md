@@ -13,7 +13,7 @@ in the function, `mockAccess`.
 3. Hash based LRU caching
 
 To avoid complexity, we used a minimal hash table size of 10. The
-mock function involves read/write using 3 different keys, 2 of which
+mock function involves read/write's using 3 different keys, 2 of which
 collide within the 10-entry hash table.
 
 Note that the mock function does not accurately represent real world
