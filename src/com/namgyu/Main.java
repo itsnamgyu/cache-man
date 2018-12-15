@@ -37,7 +37,7 @@ public class Main {
 
         // Cached Version
         db.reset();
-        CacheLayer<String, String> lru = new LRUCacher<>(db, 256, 10);
+        CacheLayer<String, String> lru = new LRUCacher<>(db, 10, 10);
         System.out.println("Testing with LRU cache...");
         start = System.currentTimeMillis();
         mockAccess(lru);
