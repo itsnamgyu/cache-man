@@ -7,7 +7,7 @@ public class LRUCacher<K, V> extends CacheLayer<K, V> {
     /*
     Whether a set operation should count as a recent reference
      */
-    private final static boolean update_on_set = true;
+    private final static boolean updateOnSet = true;
 
     /*
     An LRU cache mechanism with custom implementation of a linked-list.
@@ -98,7 +98,7 @@ public class LRUCacher<K, V> extends CacheLayer<K, V> {
     }
 
     // The size of the hash table
-    private int table_size;
+    private int tableSize;
 
     // The nodes in the table should not hold any data itself
     private Vector<BucketNode> table;
@@ -114,13 +114,13 @@ public class LRUCacher<K, V> extends CacheLayer<K, V> {
     /*
     - slots: size of LRU stack. Hence, the number of cachable elements.
      */
-    public LRUCacher(Database<K, V> origin, int table_size, int slots) {
+    public LRUCacher(Database<K, V> origin, int tableSize, int slots) {
         super(origin);
-        this.table_size = table_size;
+        this.tableSize = tableSize;
 
-        table = new Vector<>(table_size);
+        table = new Vector<>(tableSize);
         // populate head nodes of the hash table
-        for (int i = 0; i < table_size; ++i)
+        for (int i = 0; i < tableSize; ++i)
             table.add(new BucketNode());
 
         // pre-populate stack
@@ -158,7 +158,7 @@ public class LRUCacher<K, V> extends CacheLayer<K, V> {
 
     @Override
     public void setValue(K key, V value, boolean immediate) {
-        StackNode node = retrieveValue(key, update_on_set);
+        StackNode node = retrieveValue(key, updateOnSet);
         if (immediate || node == null)
             origin.setValue(key, value);
         if (node != null)
@@ -171,7 +171,7 @@ public class LRUCacher<K, V> extends CacheLayer<K, V> {
     }
 
     private BucketNode getBucketHead(K key) {
-        int h = key.hashCode() % table_size;
+        int h = key.hashCode() % tableSize;
         BucketNode node = table.get(h);
         assert(node != null);
         return node;
