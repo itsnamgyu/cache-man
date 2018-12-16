@@ -59,4 +59,4 @@ TODO: needs further explanation
 ## Limitations
 
 Since the caching occurs in dynamic memory managed by the JVM and the
-system, we are effectivly adding uneeded overhead.
+system, we are effectively adding uneeded overhead.
