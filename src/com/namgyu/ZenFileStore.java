@@ -50,7 +50,7 @@ public class ZenFileStore implements Database<String, String> {
             e.printStackTrace();
         }
 
-        Path base = get_base_directory();
+        Path base = getBaseDirectory();
 
         if (base != null) {
             Path file = base.resolve(key);
@@ -78,7 +78,7 @@ public class ZenFileStore implements Database<String, String> {
             e.printStackTrace();
         }
 
-        Path base = get_base_directory();
+        Path base = getBaseDirectory();
 
         if (base != null) {
             File f = base.resolve(key).toFile();
@@ -95,7 +95,7 @@ public class ZenFileStore implements Database<String, String> {
 
     public void reset() {
         try {
-            Files.walk(get_base_directory())
+            Files.walk(getBaseDirectory())
                     .map(Path::toFile)
                     .forEach(File::delete);
         } catch (IOException e) {
@@ -103,7 +103,7 @@ public class ZenFileStore implements Database<String, String> {
         }
     }
 
-    private Path get_base_directory() {
+    private Path getBaseDirectory() {
         File f = new File(directory);
         if (!f.exists()) f.mkdir();
 

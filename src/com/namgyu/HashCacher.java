@@ -7,24 +7,24 @@ public class HashCacher<K, V> extends CacheLayer<K, V> {
     Hash table based cache layer with a manually implement hash table.
     */
 
-    private int table_size;
+    private int tableSize;
     private Vector<K> keys;
     private Vector<V> values;
     private Vector<Boolean> dirty;
 
-    public HashCacher(Database<K, V> origin, int table_size) {
+    public HashCacher(Database<K, V> origin, int tableSize) {
         super(origin);
-        this.table_size = table_size;
-        keys = new Vector<>(table_size);
-        values = new Vector<>(table_size);
+        this.tableSize = tableSize;
+        keys = new Vector<>(tableSize);
+        values = new Vector<>(tableSize);
 
         /*
         Marks if a value in the cache has been modified, a not yet updated in
         the original database
          */
-        dirty = new Vector<>(table_size);
+        dirty = new Vector<>(tableSize);
 
-        for (int i = 0; i < table_size; ++i) {
+        for (int i = 0; i < tableSize; ++i) {
             keys.add(null);
             values.add(null);
             dirty.add(false);
@@ -37,7 +37,7 @@ public class HashCacher<K, V> extends CacheLayer<K, V> {
 
     @Override
     public V getValue(K key) {
-        int h = key.hashCode() % table_size;
+        int h = key.hashCode() % tableSize;
         if (keys.get(h) == key)
             return values.get(h);
         else {
@@ -56,7 +56,7 @@ public class HashCacher<K, V> extends CacheLayer<K, V> {
 
     @Override
     public void setValue(K key, V value, boolean immediate) {
-        int h = key.hashCode() % table_size;
+        int h = key.hashCode() % tableSize;
         if (immediate) {
             // update origin
             origin.setValue(key, value);
@@ -80,7 +80,7 @@ public class HashCacher<K, V> extends CacheLayer<K, V> {
 
     @Override
     public void flush() {
-        for (int i = 0; i < table_size; ++i)
+        for (int i = 0; i < tableSize; ++i)
             if (dirty.get(i))
                 origin.setValue(keys.get(i), values.get(i));
     }
